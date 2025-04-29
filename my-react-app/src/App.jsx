@@ -25,26 +25,14 @@ function App() {
             <Navbar />
             <main className="container mx-auto px-4 py-8">
               <Routes>
-                <Route path="/" element={
-                  <PrivateRoute>
-                    <Home />
-                  </PrivateRoute>
-                } />
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/profile/:userId" element={
-                  <PrivateRoute>
-                    <Profile />
-                  </PrivateRoute>
-                } />
+                <Route path="/profile/:userId" element={<Profile />} />
+                <Route path="/explore" element={<Explore />} />
                 <Route path="/create-post" element={
                   <PrivateRoute>
                     <CreatePost />
-                  </PrivateRoute>
-                } />
-                <Route path="/explore" element={
-                  <PrivateRoute>
-                    <Explore />
                   </PrivateRoute>
                 } />
               </Routes>

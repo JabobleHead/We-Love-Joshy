@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { FaUserPlus, FaUserCheck } from 'react-icons/fa';
 
@@ -10,6 +10,7 @@ function Profile() {
   const [isFollowing, setIsFollowing] = useState(false);
   const { userId } = useParams();
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // TODO: Fetch user data and posts from Firebase
@@ -44,6 +45,10 @@ function Profile() {
   }, [userId]);
 
   const handleFollow = () => {
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
     setIsFollowing(!isFollowing);
     // TODO: Update follow status in Firebase
   };

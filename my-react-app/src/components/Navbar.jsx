@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { FaHome, FaPlus, FaCompass, FaUser } from 'react-icons/fa';
+import { FaHome, FaPlus, FaCompass, FaUser, FaSignInAlt } from 'react-icons/fa';
 
 function Navbar() {
   const { currentUser, logout } = useAuth();
@@ -46,10 +46,17 @@ function Navbar() {
             </div>
           ) : (
             <div className="flex items-center space-x-4">
+              <Link to="/" className="text-gray-600 hover:text-pink-600">
+                <FaHome className="w-6 h-6" />
+              </Link>
+              <Link to="/explore" className="text-gray-600 hover:text-pink-600">
+                <FaCompass className="w-6 h-6" />
+              </Link>
               <Link
                 to="/login"
-                className="text-gray-600 hover:text-pink-600"
+                className="flex items-center text-gray-600 hover:text-pink-600"
               >
+                <FaSignInAlt className="w-6 h-6 mr-2" />
                 Login
               </Link>
               <Link

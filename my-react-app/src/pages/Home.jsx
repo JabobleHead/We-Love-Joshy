@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { FaHeart, FaRegHeart, FaComment } from 'react-icons/fa';
 
@@ -6,6 +7,7 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // TODO: Fetch posts from Firebase
@@ -38,11 +40,23 @@ function Home() {
   }, []);
 
   const handleLike = (postId) => {
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
     setPosts(posts.map(post => 
       post.id === postId 
         ? { ...post, likes: post.likes + 1 }
         : post
     ));
+  };
+
+  const handleComment = () => {
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+    // TODO: Implement comment functionality
   };
 
   if (loading) {
@@ -78,7 +92,10 @@ function Home() {
               >
                 <FaRegHeart />
               </button>
-              <button className="text-2xl text-gray-600 hover:text-pink-600">
+              <button 
+                onClick={handleComment}
+                className="text-2xl text-gray-600 hover:text-pink-600"
+              >
                 <FaComment />
               </button>
             </div>
